@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { Provider } from "@/providers/Provider";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-geist-mono",
@@ -20,7 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={jetbrainsMono.className}>
-        <main className="flex items-center justify-center mt-10">{children}</main>
+        <Provider>
+          <main className="flex items-center justify-center mt-10">
+            {children}
+          </main>
+        </Provider>
       </body>
     </html>
   );
