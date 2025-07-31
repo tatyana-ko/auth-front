@@ -1,10 +1,10 @@
 "use client";
 
 import { SocialsButtons } from "@/components/SocialsButtons";
-import { PUBLIC_PAGES } from "@/config/public-pages.config";
-import { socials } from "@/data/socials.data";
+import { SwitchingAuth } from "@/components/SwitchingAuth";
+import { BACKEND_SOCIAL_AUTH_URL } from "@/constants/constants";
+import { Social, socials } from "@/data/socials.data";
 import { useAuthForm } from "@/hooks/useAuthForm";
-import Link from "next/link";
 import ReCAPTCHA from "react-google-recaptcha";
 
 interface Props {
@@ -15,6 +15,10 @@ interface Props {
 export function AuthForm({ title, isLoginForm }: Props) {
   const { handleSubmit, isPending, onSubmit, register, recaptchaRef } =
     useAuthForm(isLoginForm ? "login" : "register");
+
+  const handleRedirect = (socialsId: Social) => {
+    window.location.href = `${BACKEND_SOCIAL_AUTH_URL}/${socialsId}`;
+  };
 
   return (
     <form
@@ -48,7 +52,7 @@ export function AuthForm({ title, isLoginForm }: Props) {
         ref={recaptchaRef}
       />
 
-      <SocialsButtons socials={socials} />
+      <SocialsButtons socials={socials} redirect={handleRedirect} />
 
       <button
         type="submit"
@@ -58,20 +62,7 @@ export function AuthForm({ title, isLoginForm }: Props) {
         {isLoginForm ? "Log In" : "Register"}
       </button>
 
-      <p>
-        {isLoginForm
-          ? "Don't have an account yet? "
-          : "Already have an account? "}
-        {isLoginForm ? (
-          <Link href={PUBLIC_PAGES.REGISTER} className="text-blue-900">
-            sign up
-          </Link>
-        ) : (
-          <Link href={PUBLIC_PAGES.LOGIN} className="text-blue-900">
-            sign in
-          </Link>
-        )}
-      </p>
+      <SwitchingAuth isLoginForm={isLoginForm} />
     </form>
   );
 }

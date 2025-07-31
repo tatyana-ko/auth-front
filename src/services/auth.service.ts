@@ -32,6 +32,17 @@ class AuthService {
 
     return response;
   }
+
+  async getNewTokens() {
+    const response = await axiosClassic.post<IAuthResponse>(
+      "/auth/access-token"
+    );
+
+    if (response.data.accessToken)
+      tokenService.saveToken(response.data.accessToken);
+
+    return response;
+  }
 }
 
 export const authService = new AuthService();
