@@ -1,3 +1,5 @@
+import { ExampleOfHomePage } from "@/components/ExampleOfHomePage";
+
 export default function Home() {
-  return <div>HOME</div>;
+  return <ExampleOfHomePage />;
 }
