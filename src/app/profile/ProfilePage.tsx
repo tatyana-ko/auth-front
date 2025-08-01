@@ -10,7 +10,13 @@ export function ProfilePage() {
     refetchInterval: 1800000,
   });
 
+  console.log(data);
+
   return (
-    <div>Email: {data?.data ? <p>{data?.data.email} </p> : <p>no email</p>}</div>
+    <div>
+      <div>Email: {data?.data ? <p>{data?.data.email} </p> : <p>no email</p>}</div>
+
+  
+    </div>
   );
 }

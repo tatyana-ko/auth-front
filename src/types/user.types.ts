@@ -7,4 +7,10 @@ export interface IUser {
   avatarPath?: string;
   verificationToken?: string;
   rights: UserRole[];
+  createdAt: string;
+  updatedAt: string;
+  otpCode: string;
+  otpExpiresAt: string;
+  phone: string;
+  telegramId: string;
 }
