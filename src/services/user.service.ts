@@ -1,10 +1,11 @@
 import { instance } from "@/axios/axios";
+import { IUser } from "@/types/user.types";
 
 class UserService {
   private _BASE_URL = "/users";
 
   async getProfile() {
-    return instance.get(`${this._BASE_URL}/profile`);
+    return instance.get<IUser>(`${this._BASE_URL}/profile`);
   }
 }
 

@@ -10,13 +10,20 @@ export function ProfilePage() {
     refetchInterval: 1800000,
   });
 
-  console.log(data);
-
   return (
-    <div>
-      <div>Email: {data?.data ? <p>{data?.data.email} </p> : <p>no email</p>}</div>
-
-  
-    </div>
+    <>
+      {data?.data ? (
+        <div>
+          <div>
+            Email: {data?.data ? <p>{data?.data.email} </p> : <p>no email</p>}
+          </div>
+          {data?.data.verificationToken
+            ? "Email verified"
+            : "Email requires confirmation"}
+        </div>
+      ) : (
+        <span>Please log in!</span>
+      )}
+    </>
   );
 }
