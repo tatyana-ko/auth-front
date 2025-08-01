@@ -43,6 +43,20 @@ class AuthService {
 
     return response;
   }
+
+  async getNewTokenByRefresh(refreshToken: string) {
+    const response = await axiosClassic.post<IAuthResponse>(
+      `${this._AUTH}/access-token`,
+      {},
+      {
+        headers: {
+          Cookie: `refreshToken=${refreshToken}`,
+        },
+      }
+    );
+
+    return response.data;
+  }
 }
 
 export const authService = new AuthService();
